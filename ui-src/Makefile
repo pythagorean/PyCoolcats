@@ -1,0 +1,2 @@
+build:
+	paver -q build

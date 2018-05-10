@@ -1,0 +1,25 @@
+{
+  "name": "pyclutter",
+  "version": "0.1.0",
+  "description": "clutter app for Holochain ported to Python",
+  "main": "",
+  "directories": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pythagorean/pyclutter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pythagorean/pyclutter/issues"
+  },
+  "homepage": "https://github.com/pythagorean/pyclutter#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "uglify-js": "^3.3.23"
+  }
+}
