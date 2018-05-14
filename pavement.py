@@ -13,6 +13,7 @@ def build(options):
     for function in hc_functions:
         hc_api.append('var hc_' + function + ' = ' + function + ';')
     hc_api += [' = '.join(hc_functions) + ' = undefined;', '']
+    hc_api += ['del property'] # restore normal Python function
     runtime = polyfill = []
     if hasattr(options, 'runtime') and options.runtime:
         polyfill = ['// Using babel polyfill libraries for otto']
@@ -43,9 +44,6 @@ def build(options):
             print('Minifying target code in: ' + minfile.relpath())
             sh('node_modules/uglify-js/bin/uglifyjs --compress --mangle -- ' +
                 jsfile.relpath() + ' > ' + minfile.relpath())
-    if not path('ui').exists(): return
-    for pyfile in path('ui').files('*.py'):
-        sh('transcrypt ' + pyfile.relpath())
 
 @task
 def clean():
