@@ -1,21 +1,15 @@
 __pragma__('js', '{}', '''
-import React from 'react'
+import { createElement as e } from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import AppContainer from './AppContainer'
-
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <Router>
-      <Route path='/' component={AppContainer} />
-    </Router>
-  </Provider>
-)
-
-Root.propTypes = {
-  store: PropTypes.object.isRequired
-}
-
-export default Root
 ''')
+
+Root = lambda stored: e(Provider, { 'store': stored['store'] },
+    e(Router, None,
+        e(Route, { 'path': '/', 'component': AppContainer })))
+
+Root.propTypes = { 'store': PropTypes.object.isRequired }
+
+__pragma__('js', 'export default Root')
