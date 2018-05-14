@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import Root from './Root'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
-
 import CreateStore from './store'
 ''')
 

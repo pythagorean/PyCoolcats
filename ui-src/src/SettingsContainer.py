@@ -1,24 +1,15 @@
+__pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import Settings from './Settings'
-import {
-  newHandle
-} from './actions'
+import { newHandle } from './actions'
+''')
 
-const mapStateToProps = state => {
-  return {
-    handleTaken: state.handleTaken
-  }
-}
+mapStateToProps = lambda state: { 'handleTaken': state.handleTaken }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    newHandle: (handle, then) => {
-      dispatch(newHandle(handle))
+mapDispatchToProps = lambda dispatch: {
+    'newHandle': lambda handle, then: dispatch(
+        newHandle(handle))
     }
-  }
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Settings)
+__pragma__('js',
+    'export default connect(mapStateToProps, mapDispatchToProps)(Settings)')
