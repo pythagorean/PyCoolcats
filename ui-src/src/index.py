@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Root from './Root'
@@ -13,3 +14,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 registerServiceWorker()
+''')

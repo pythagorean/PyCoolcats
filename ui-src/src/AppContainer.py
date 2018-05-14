@@ -1,12 +1,7 @@
+__pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import App from './App'
-import {
-  appProperty,
-  getHandle,
-  getHandles,
-  getFollow,
-  getPostsBy
-} from './actions'
+import { appProperty, getHandle, getHandles, getFollow, getPostsBy } from './actions'
 
 const mapStateToProps = state => {
   return {
@@ -38,3 +33,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App)
+''')
