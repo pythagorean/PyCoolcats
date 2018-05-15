@@ -4,7 +4,7 @@ import App from './App'
 import { appProperty, getHandle, getHandles, getFollow, getPostsBy } from './actions'
 ''')
 
-mapStateToProps = lambda state: __pragma__('js', '{}', '{...state}')
+mapStateToProps = lambda state: __pragma__('js', '{}', '{ ...state }')
 
 mapDispatchToProps = lambda dispatch: {
     'getMyHandle': lambda: dispatch(

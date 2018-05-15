@@ -22,7 +22,7 @@ def build():
                 if line[12:37] == 'for (var attrib in obj) {':
                     line = line[:31] + 'anObject' + line[34:]
                 runtime.append(line)
-            runtime.append('\nexport {dict, list, tuple}')
+            runtime.append('\nexport { dict, list, tuple }')
             rtfile.write_lines(runtime)
 
         imports = [
@@ -31,7 +31,7 @@ def build():
         module = [
             '\n// Transcrypted Python module for React',
             '// eslint-disable-next-line',
-            "import {dict, list, tuple} from './transcrypt-runtime'"]
+            "import { dict, list, tuple } from './transcrypt-runtime'"]
 
         for line in modfile.lines()[2:]:
             line = line[2:]
@@ -42,6 +42,6 @@ def build():
                 module.append(line)
 
         jsfile.write_lines(imports + module)
-        
+
     # cleanup intermediate javascript
     sh('for x in `find . -name "__javascript__"`; do rm -rf $x; done')
