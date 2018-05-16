@@ -1,22 +1,15 @@
+__pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import NewMeow from './NewMeow'
-import {
-  post
-} from './actions'
+import { post } from './actions'
+''')
 
-const mapStateToProps = state => {
-  return {}
-}
+mapStateToProps = lambda: {}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    post: (message, then) => {
-      dispatch(post(message, then))
-    }
-  }
-}
+mapDispatchToProps = lambda dispatch: {
+    'post': lambda message, then: dispatch(
+        post(message, then)
+        )}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewMeow)
+__pragma__('js',
+    'export default connect(mapStateToProps, mapDispatchToProps)(NewMeow)')
