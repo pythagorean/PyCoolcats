@@ -12,8 +12,7 @@ def build(options):
         'remove', 'query', 'send', 'bundleStart', 'bundleClose']
     for function in hc_functions:
         hc_api.append('var hc_' + function + ' = ' + function + ';')
-    hc_api += [' = '.join(hc_functions) + ' = undefined;', '']
-    hc_api += ['del property'] # restore normal Python function
+    hc_api += [' = '.join(hc_functions[1:]) + ' = undefined;', '']
     runtime = polyfill = []
     if hasattr(options, 'runtime') and options.runtime:
         polyfill = ['// Using babel polyfill libraries for otto']
