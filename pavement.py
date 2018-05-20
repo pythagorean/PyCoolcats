@@ -2,7 +2,7 @@ from paver.easy import *
 
 @task
 @cmdopts([
-    ('runtime', 'r', 'Include Transcrypt runtime in app DNA'),
+    ('runtime', 'r', 'Include runtime in app DNA'),
 ])
 def build(options):
     hc_api = ['// Holochain API functions for Transcrypted Python module']
@@ -14,10 +14,13 @@ def build(options):
         hc_api.append('var hc_' + function + ' = ' + function + ';')
     hc_api += [' = '.join(hc_functions[1:]) + ' = undefined;', '']
     runtime = polyfill = []
-    if hasattr(options, 'runtime') and options.runtime:
-        polyfill = ['// Using babel polyfill libraries for otto']
-        polyfill += path('node_modules/babel-polyfill/dist/polyfill.js').lines()
-
+    if hasattr(options, 'runtime'):
+        rtfile = path('dna/runtime.js')
+        if rtfile.isfile():
+            runtime = rtfile.lines()
+        else:
+            polyfill = ['// Using babel polyfill libraries for otto']
+            polyfill += path('node_modules/babel-polyfill/dist/polyfill.js').lines()
     for dir in path('dna').dirs():
         for pyfile in dir.files('*.py'):
             sh('transcrypt -n -p .none ' + pyfile.relpath())
@@ -30,9 +33,8 @@ def build(options):
                 for line in jsfile.lines()[3:]:
                     if line[1:2] == '(': break
                     runtime.append(line)
-                runtime.append('\n// Transcrypted Python module for otto')
 
-            modlines = []
+            modlines = ['\n// Transcrypted Python module for otto']
             for line in modfile.lines()[2:]:
                 if line[3:4] == '_': break
                 modlines.append(line[2:])
