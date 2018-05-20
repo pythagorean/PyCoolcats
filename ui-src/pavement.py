@@ -2,7 +2,7 @@ from paver.easy import *
 
 @task
 def build():
-    runtime = []
+    py_functions = runtime = []
     rtfile = path('src/transcrypt-runtime.js')
     for pyfile in path('src').files('*.py'):
         pyfile = path(pyfile)
@@ -22,7 +22,8 @@ def build():
                 if line[12:37] == 'for (var attrib in obj) {':
                     line = line[:31] + 'anObject' + line[34:]
                 runtime.append(line)
-            runtime.append('\nexport { dict, list, tuple }')
+            py_functions = ['dict', 'list', 'tuple']
+            runtime.append('\nexport { ' + ', '.join(py_functions) + ' }')
             rtfile.write_lines(runtime)
 
         imports = [
@@ -31,7 +32,9 @@ def build():
         module = [
             '\n// Transcrypted Python module for React',
             '// eslint-disable-next-line',
-            "import { dict, list, tuple } from './transcrypt-runtime'"]
+            ('import { ' + ', '.join(py_functions) + ' } ' +
+                "from './transcrypt-runtime'"
+            )]
 
         for line in modfile.lines()[2:]:
             line = line[2:]
