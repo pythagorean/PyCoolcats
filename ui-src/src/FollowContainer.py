@@ -4,7 +4,7 @@ import Follow from './components/Follow'
 import { follow, unfollow } from './actions'
 ''')
 
-__pragma__('noalias', 'keys')
+__pragma__('noalias', 'keys') # use js_keys
 
 def mapStateToProps(state):
     # console.log('state.handles ' + JSON.stringify(state.handles))

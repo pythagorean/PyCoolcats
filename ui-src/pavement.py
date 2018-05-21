@@ -22,7 +22,7 @@ def build():
                 if line[12:37] == 'for (var attrib in obj) {':
                     line = line[:31] + 'anObject' + line[34:]
                 runtime.append(line)
-            py_functions = ['dict', 'list', 'tuple']
+            py_functions = ['dict', 'list', 'tuple', 'len']
             runtime.append('\nexport { ' + ', '.join(py_functions) + ' }')
             rtfile.write_lines(runtime)
 

@@ -6,12 +6,12 @@ const { div } = require('hyperscript-helpers')(e)
 ''')
 
 def followingFeedComponentDidMount(self):
-    if self.props.handle and self.props.follows.length:
+    if self.props.handle and len(self.props.follows):
         self.setupFeedFetch()
 
 def followingFeedComponentDidUpdate(self, prevProps):
-    if self.props.follows.length is not prevProps.follows.length or \
-        (not prevProps.handle and self.props.handle):
+    if (len(self.props.follows) is not len(prevProps.follows) or
+        (not prevProps.handle and self.props.handle)):
         self.setupFeedFetch()
 
 def followingFeedSetupFeedFetch(self):

@@ -1,35 +1,44 @@
 __pragma__('js', '{}', '''
-import React, { Component } from 'react'
+import { createElement as e } from 'react'
+import createReactClass from 'create-react-class'
 import Meow from './components/Meow'
-
-class UserFeed extends Component {
-  componentDidMount () {
-    this.setupForNewUser()
-  }
-  componentDidUpdate (prevProps) {
-    if (prevProps.handle !== this.props.handle) {
-      this.setupForNewUser()
-    }
-  }
-  setupForNewUser () {
-    this.props.getPosts(this.props.handle)
-    if (this.interval) clearInterval(this.interval)
-    this.interval = setInterval(() => {
-      this.props.getPosts(this.props.handle)
-    }, 1000)
-  }
-  componentWillUnmount () {
-    if (this.interval) clearInterval(this.interval)
-  }
-  render () {
-    return (
-      <div id='meows'>
-        <h2 id='user-header'>{this.props.handle}</h2>
-        {this.props.postList.map(post => <Meow post={post} key={post.stamp} />)}
-      </div>
-    )
-  }
-}
-
-export default UserFeed
+const { div, h2 } = require('hyperscript-helpers')(e)
 ''')
+
+def userFeedComponentDidUpdate(self, prevProps):
+    if prevProps.handle is not this.props.handle:
+        self.setupForNewUser()
+
+def userFeedSetupForNewUser(self):
+    self.props.getPosts(self.props.handle)
+    if self.interval: clearInterval(self.interval)
+    self.interval = setInterval(
+        (lambda: self.props.getPosts(this.props.handle)), 1000)
+
+def userFeedComponentWillUnmount(self):
+    if self.interval: clearInterval(self.interval)
+
+UserFeed = createReactClass({
+    'componentDidMount':
+        lambda: this.setupForNewUser(),
+
+    'componentDidUpdate':
+        lambda prevProps: userFeedComponentDidUpdate(this, prevProps),
+
+    'setupForNewUser':
+        lambda: userFeedSetupForNewUser(this),
+
+    'componentWillUnmount':
+        lambda: userFeedComponentWillUnmount(this),
+
+    'render':
+        lambda: div({ 'id': 'meows' },
+            h2({ 'id': 'user-header' }, this.props.handle),
+            this.props.postList.map(
+                lambda post: e(Meow, {
+                    'post': post,
+                    'key': post.stamp
+                })))
+    })
+
+__pragma__('js', 'export default UserFeed')
