@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import UserFeed from './UserFeed'
 import { getPostsBy } from './actions'
@@ -26,3 +27,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(UserFeed)
+''')
