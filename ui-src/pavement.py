@@ -65,5 +65,5 @@ def clean():
     if rtfile.isfile(): sh('rm ' + rtfile)
     for dir in [path('src')] + path('src').dirs():
         for pyfile in dir.files('*.py'):
-            jsfile = path('src/' + pyfile.namebase + '.js')
+            jsfile = path(pyfile.parent + '/' + pyfile.namebase + '.js')
             if jsfile.isfile(): sh('rm ' + jsfile)

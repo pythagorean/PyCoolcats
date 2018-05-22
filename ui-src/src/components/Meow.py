@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -24,3 +25,4 @@ class Meow extends Component {
 }
 
 export default Meow
+''')
