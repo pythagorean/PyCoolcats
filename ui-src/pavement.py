@@ -2,7 +2,8 @@ from paver.easy import *
 
 @task
 def build():
-    py_functions = runtime = []
+    runtime = []
+    py_functions = ['dict', 'list', 'tuple', 'len']
     rtfile = path('src/transcrypt-runtime.js')
     for pyfile in path('src').files('*.py'):
         pyfile = path(pyfile)
@@ -22,7 +23,6 @@ def build():
                 if line[12:37] == 'for (var attrib in obj) {':
                     line = line[:31] + 'anObject' + line[34:]
                 runtime.append(line)
-            py_functions = ['dict', 'list', 'tuple', 'len']
             runtime.append('\nexport { ' + ', '.join(py_functions) + ' }')
             rtfile.write_lines(runtime)
 
@@ -31,10 +31,12 @@ def build():
            '\n// Imports for React']
         module = [
             '\n// Transcrypted Python module for React',
+            '/* eslint no-whitespace-before-property: "off" */',
+            '/* eslint no-mixed-operators: "off" */',
             '// eslint-disable-next-line',
             ('import { ' + ', '.join(py_functions) + ' } ' +
-                "from './transcrypt-runtime'"
-            )]
+                "from './transcrypt-runtime'")
+            ]
 
         for line in modfile.lines()[2:]:
             line = line[2:]
@@ -48,3 +50,11 @@ def build():
 
     # cleanup intermediate javascript
     sh('for x in `find . -name "__javascript__"`; do rm -rf $x; done')
+
+@task
+def clean():
+    for pyfile in path('src').files('*.py'):
+        jsfile = path('src/' + pyfile.namebase + '.js')
+        if jsfile.isfile(): sh('rm ' + jsfile)
+    rtfile = path('src/transcrypt-runtime.js')
+    if rtfile.isfile(): sh('rm ' + rtfile)
