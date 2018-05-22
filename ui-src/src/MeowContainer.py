@@ -10,10 +10,11 @@ def mapStateToProps(state, ownProps):
     meowHash = ownProps.match.params.meowHash
     arrayOfPosts = Object.keys(state.posts).map(
         lambda postStamp: state.posts[postStamp])
-    post = arrayOfPosts.find(
+    meow = arrayOfPosts.find(
         lambda p: p.hash is meowHash)
-    if post: post = Object.assign({}, post,
-        { 'userHandle': state.handles[post.author] })
+    post = Object.assign({}, meow, {
+            'userHandle': state.handles[meow.author]
+        }) if meow else meow
     return { 'post': post }
 
 mapDispatchToProps = lambda dispatch, ownProps: {

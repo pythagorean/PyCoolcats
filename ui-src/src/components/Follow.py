@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import React, { Component } from 'react'
 
 class Follow extends Component {
@@ -77,3 +78,4 @@ class Follow extends Component {
 }
 
 export default Follow
+''')
