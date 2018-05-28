@@ -17,7 +17,7 @@
             "Name": "clutter",
             "Description": "zome that implements micro-blogging",
             "RibosomeType": "js",
-            "CodeFile": "__javascript__/clutter.min.js",
+            "CodeFile": "__javascript__/clutter.js",
             "Config": {
               "ErrorHandling": "throwErrors"
             },
@@ -131,7 +131,7 @@
             "Name": "anchors",
             "Description": "anchors mixin",
             "RibosomeType": "js",
-            "CodeFile": "__javascript__/anchors.min.js",
+            "CodeFile": "__javascript__/anchors.js",
             "Config": {
               "ErrorHandling": "throwErrors"
             },

@@ -11,9 +11,10 @@ To compile the Python for Holochain and React, you will first need to install
     pip install transcrypt
     pip install paver
 
-Then you need to update some libraries by running 'npm install' or 'yarn' in the main directory. After that just run 'make' and it should build the Zome.
+Just run 'make' and it should build the Zome.
 
-Then go into ui-src and run 'npm install' or 'yarn' again, followed by 'npm build' or 'yarn build' to compile and install the ui.
+Then go into ui-src and run 'npm install' or 'yarn', followed by 'npm build' or
+'yarn build' to compile and install the ui.
 
 If you don't understand what this is about, please see the clutter page linked above.
 
