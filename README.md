@@ -1,5 +1,5 @@
-# pyclutter
-Fully distributed twitter built on holochain: port to Python in process
+# coolcats
+Python port of clutter, a fully distributed social messaging app built on Holochain
 
 See https://github.com/holochain/clutter for the code that is being ported.
 
