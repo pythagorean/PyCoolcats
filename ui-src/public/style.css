@@ -3,7 +3,9 @@ body {
 	height: 100%;
 	background-color: #BBB;
 	background-image: url("cats.jpg");
-	background-size: 100% auto;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
 	width: calc(100vw - 34px); /* Prevent jump from scrollbar appearing on only some pages */
 	padding-left: 9px; /* Recenter page from scrollbar width adjustment */
 }
@@ -16,6 +18,22 @@ ul {
 .row {
   margin-top: 1em;
 }
+
+.row .first {
+	width: 100%;
+}
+
+/* Profile Style*/
+.logo img {
+	padding: 50px 0px 10px 0px;
+	max-width: 150px;
+}
+
+#banner a {
+	color: #fff;
+	text-decoration: none;
+}
+
 #container {
 	margin: 0;
 	width: 100%;
@@ -29,11 +47,23 @@ ul {
 
 #followButton {
   float: right;
-  margin: 8px;
+  margin: 50px 8px 8px 8px;
+}
+
+@media (max-width: 410px) {
+	#followButton {
+			margin: 30px 30%!important;
+			float:none;
+	}
 }
 
 #meow {
   margin: 10px;
+	height: 100px;
+}
+
+#postMeow {
+	float: right;
 }
 
 p {
@@ -115,6 +145,7 @@ ul li {
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+/* Logo style */
 .logo {
   margin-bottom: 1em;
   text-align: center;
@@ -124,8 +155,17 @@ ul li {
 	width: 100%;
 }
 
+.col-sm-2.contentcontainer {
+	margin: 0 auto;
+	max-width: 50%;
+}
+
 #about {
   color: white;
+}
+
+.form-row #handle {
+	text-align: left;
 }
 
 a#handle {
@@ -133,6 +173,8 @@ a#handle {
   //background-color: rgba(0, 0, 0, 0.6);
   text-align:center;
   color:white;
+	font-size: 1.3em;
+	font-weight: 400;
 }
 
 .subtitle {
@@ -189,15 +231,60 @@ a#handle {
 	padding-right: 10px;
 }
 
-#content {
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+		width: 100% !important;
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
+
+@media (min-width: 768px) {
+	.fixed-area{
+		position: fixed;
+		top: 0px;
+		z-index: 99999;
+		background: #000;
+		width: 100%;
+	}
+}
+
+#displayName
+{
+	font-size: 1.3em;
+	color: #fff;
+	padding-bottom: 10px;
+}
+/* Meow Feed Style */
+
+#content, #feedContent {
 	font-size: 1.15em;
 	line-height: 1.4;
 	overflow: hidden;
 }
 
-#content p {
-	text-indent: 2.4em;
+#content p, #feedContent p {
 	margin-bottom: 1.25em;
+}
+
+#feedContent {
+	clear:both;
+	max-width: 55%;
+	margin: 275px auto 0 auto;
+}
+
+@media (max-width: 1200px) and (min-width: 768px){
+	#feedContent{
+		margin: 300px auto 0 auto!important;
+		max-width: 75%!important;
+	}
+}
+
+@media (max-width: 768px){
+	#feedContent{
+		margin: 50px auto 0 auto!important;
+		max-width: 77%!important;
+	}
 }
 
 blockquote {
@@ -214,9 +301,15 @@ blockquote {
 
 .right {
 	float: right;
+
 }
 
-
+.close {
+	float: right;
+	position: relative;
+	top: 10px;
+	right: 10px;
+}
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */
 @media only screen and (max-width: 480px) {
@@ -292,11 +385,9 @@ blockquote {
 	width: 100px;
 }
 
-
 .meow-edit {
   float:right;
 }
-
 
 .spinner
 { display: none;

@@ -11,7 +11,7 @@
             "Regexp": ""
         },
         {
-            "Time":11000,
+            "Time":200,
             "Convey":"We can retrieve a list of all handles",
             "Zome": "clutter",
             "Input": "var handles = getHandles(); handles.length==1",
@@ -30,7 +30,7 @@
             "Exposure":"public",
             "Err": "",
             "Regexp": "",
-            "Time":12000
+            "Time":500
         }
     ]
 }

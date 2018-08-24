@@ -1,7 +1,7 @@
 {
     "Tests":[
       {
-            "Time":13000,
+            "Time":2000,
             "Convey":"setup handle for posting",
             "Zome": "clutter",
             "FnName": "newHandle",
@@ -12,7 +12,7 @@
             "Regexp": ""
         },
         {
-            "Time":15000,
+            "Time":2500,
             "Convey":"There are no followers for Joe yet",
             "Zome": "clutter",
             "FnName": "getFollow",
@@ -24,7 +24,7 @@
             "Exposure":"public"
         },
         {
-            "Time":19000,
+            "Time":2700,
             "Convey":"follow jane",
             "Zome": "clutter",
             "FnName": "follow",
@@ -35,7 +35,7 @@
             "Regexp": ""
         },
         {
-            "Time":20000,
+            "Time":3000,
             "Convey":"retrieve jane's posts",
             "Zome":   "clutter",
             "FnName": "getPostsBy",
@@ -45,7 +45,7 @@
             "Regexp": ".*hello world.*"
         },
         {
-            "Time":21000,
+            "Time":5000,
             "Convey":"We can retrieve a list of all handles",
             "Zome": "clutter",
             "Input": "var handles = getHandles(); handles.length==2",
@@ -55,7 +55,7 @@
             "Raw": true
         },
         {
-            "Time":21000,
+            "Time":5000,
             "Convey":"We can retrieve a list of people Joe is following",
             "Zome": "clutter",
             "FnName": "getFollow",
