@@ -12,9 +12,9 @@ def anchor(anchor):
         hc_debug('anchorTypeGet ' + JSON.stringify(anchorTypeGet))
         hc_debug('<mermaid>' + App.Agent.String + '-->>DHT:Check to see if ' + anchor.anchorType + ' has been setup</mermaid>')
         if anchorTypeGet is None:
-            rootAnchorTypeHash = hc_get(hc_makeHash('anchor', rootAnchortype))
+            rootAnchorTypeHash = hc_makeHash('anchor', rootAnchortype)
             hc_debug('<mermaid>' + App.Agent.String + '-->>DHT:Check to see if the Root of all anchors has been setup</mermaid>')
-            if rootAnchorTypeHash is None:
+            if hc_get(rootAnchorTypeHash) is None:
                 rootAnchorTypeHash = hc_commit('anchor', rootAnchortype)
                 hc_debug('<mermaid>' + App.Agent.String + '->>' + App.Agent.String + ':commit Root of all anchors to local chains</mermaid>')
                 hc_debug('<mermaid>' + App.Agent.String + '->>DHT:Publish Root of all anchors</mermaid>')
