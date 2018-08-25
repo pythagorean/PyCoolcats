@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -135,3 +136,4 @@ class EditProfile extends Component {
 }
 
 export default EditProfile
+''')

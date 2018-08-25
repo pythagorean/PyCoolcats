@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import React, { Component } from 'react'
 import Meow from './components/Meow'
 
@@ -33,3 +34,4 @@ class HashtagFeed extends Component {
 }
 
 export default HashtagFeed
+''')

@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import HashtagFeed from './HashtagFeed'
 import { getPostsWithHashtag } from './actions'
@@ -26,3 +27,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(HashtagFeed)
+''')

@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -48,3 +49,4 @@ Modal.propTypes = {
 }
 
 export default Modal
+''')

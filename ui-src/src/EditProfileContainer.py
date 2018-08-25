@@ -1,3 +1,4 @@
+__pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import EditProfile from './EditProfile'
 import { getFirstName, setFirstName, setProfilePic } from './actions'
@@ -25,3 +26,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)
+''')
