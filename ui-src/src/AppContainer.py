@@ -1,12 +1,15 @@
 __pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import App from './App'
-import { appProperty, getHandle, getHandles, getFollow, getPostsBy } from './actions'
+import { appProperty, getFirstName, getHandle, getHandles, getFollow, getPostsBy, getProfilePic } from './actions'
 ''')
 
 mapStateToProps = lambda state: __pragma__('js', '{}', '{ ...state }')
 
 mapDispatchToProps = lambda dispatch: {
+    'getFirstName': lambda: dispatch(
+        getFirstName()),
+
     'getMyHandle': lambda: dispatch(
         appProperty('Agent_Handle')),
 
@@ -20,7 +23,10 @@ mapDispatchToProps = lambda dispatch: {
         getFollow(handle, type, then)),
 
     'getPostsBy': lambda handles, then: dispatch(
-        getPostsBy(handles, then))
+        getPostsBy(handles, then)),
+
+    'getProfilePic': lambda: dispatch(
+        getProfilePic())
     }
 
 __pragma__('js', 'export default connect(mapStateToProps, mapDispatchToProps)(App)')

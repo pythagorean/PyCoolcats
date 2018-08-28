@@ -1,15 +1,42 @@
 __pragma__('js', '{}', '''
 import { createElement as e } from 'react'
 import createReactClass from 'create-react-class'
-const { div, h3, p, i, form, input, button } = require('hyperscript-helpers')(e)
+const { div, p, i, form, input, button } = require('hyperscript-helpers')(e)
 ''')
 
+MAX_HANDLE_LENGTH = 20
+
 def settingsOnHandleSubmit(self, handle):
+    getFirstName = self.props.getFirstName
+    handles = self.props.handles
+    newHandle = self.props.newHandle
+    setFirstName = self.props.setFirstName
+    toggleModal = self.props.toggleModal
+    newHandleText = self.state.newHandleText
+
     handle.preventDefault()
-    self.setState({ 'newHandleText': '' })
-    if not self.state['newHandleText']: return
-    self.props.newHandle(self.state['newHandleText'])
-    self.setState({ 'newHandleText': '' })
+
+    # empty string given as input
+    if not newHandleText: return
+
+    # max characters exceeded
+    if len(newHandleText) > MAX_HANDLE_LENGTH:
+        self.setState({ 'newHandleText': '' })
+        return
+
+    newHandle(newHandleText)
+
+    handleExists = handles.find(
+        lambda handleObj: handleObj.handle is newHandleText)
+    if handleExists:
+        newHandle('')
+        return
+
+    # check if a name has been set, and if not default to handle
+    if not getFirstName() or len(getFirstName()) > 1:
+        setFirstName(newHandleText)
+
+    toggleModal()
 
 Settings = createReactClass({
     'getInitialState': lambda: { 'newHandleText': '' },
@@ -19,39 +46,52 @@ Settings = createReactClass({
 
     'onHandleSubmit': lambda handle: settingsOnHandleSubmit(this, handle),
 
-    'render': lambda: div({ 'className': 'panel panel-default' },
-        div({ 'className': 'panel-body' },
-            h3({ 'id': 'setHandleModalLabel' }, 'Set your handle'),
-            p({ 'style': { 'display':
-                    'inline' if this.props.handleTaken is True else 'none'
-                }},
-                'Handle already taken try another one'
-                ),
+    'render': lambda: div({ 'className': "panel panel-default" },
+        div({ 'className': "panel-body" },
+            div({ 'style': { 'paddingLeft': 30, 'paddingBottom': 10 } },
+                p({
+                        'className': "text-info",
+                        'style': {
+                            'display': (this.state.newHandleText.length is 0 and this.props.handleTaken is False) and 'inline' or 'none'
+                            }
+                        },
+                    "Set your handle to get meowing"
+                    )),
+            div({ 'style': { 'paddingLeft': 30, 'paddingBottom': 10 } },
+                p({
+                        'className': "text-danger",
+                        'style': {
+                            'display': this.props.handleTaken is True and 'inline' or 'none'
+                            }
+                        },
+                    "This handle already has a home, try something else!"
+                    )),
             form({
-                    'id': 'handleForm',
+                    'id': "handleForm",
                     'onSubmit': this.onHandleSubmit,
-                    'className': 'form-group'
+                    'className': "form-group"
                     },
-                div({ 'className': 'col-xs-8' },
-                    div({ 'className': 'form-group input-icon' },
-                        i(None, '@'),
+                div({ 'className': "col-xs-8" },
+                    div({ 'className': "form-group input-icon" },
+                        i(None,
+                            "@"
+                            ),
                         input({
                             'value': this.state.newHandleText,
                             'onChange': this.updateHandleText,
-                            'type': 'text',
-                            'className': 'form-control',
-                            'id': 'myHandle',
-                            'placeholder': 'handle'
-                            })
-                        )),
-                div({ 'className': 'col-xs-2' },
+                            'type': "text",
+                            'className': "form-control",
+                            'id': "myHandle",
+                            'placeholder': "handle"
+                            }))),
+                div({ 'className': "col-xs-2" },
                     button({
-                            'id': 'setHandleButton',
-                            'type': 'submit',
-                            'className': 'btn btn-primary'
+                            'id': "setHandleButton",
+                            'type': "submit",
+                            'className': "btn btn-primary"
                             },
-                        'Set Handle'
+                        "Set Handle"
                         )))))
-    })
+        })
 
 __pragma__('js', 'export default Settings')
