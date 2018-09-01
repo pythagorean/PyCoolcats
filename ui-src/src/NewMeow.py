@@ -1,7 +1,7 @@
 __pragma__('js', '{}', '''
 import { createElement as e } from 'react'
 import createReactClass from 'create-react-class'
-const { form, input, button } = require('hyperscript-helpers')(e)
+const { form, div, textarea, button } = require('hyperscript-helpers')(e)
 ''')
 
 def newMeowOnSubmit(self, meow):
@@ -20,22 +20,23 @@ NewMeow = createReactClass({
 
     'render': lambda: form({
             'onSubmit': this.onMeowSubmit,
-            'id': 'meow-form',
-            'action': ''
+            'id': "meow-form",
+            'action': ""
             },
-        input({
-                'value': this.state.newMeowText,
-                'onChange': this.updateMeowText,
-                'className': 'form-control',
-                'id': 'meow',
-                'name': 'meow',
-                'type': 'text',
-                'size': '64'
-                }),
+        div({ 'className': "form-group col-xs-12" },
+            textarea({
+                    'value': this.state.newMeowText,
+                    'onChange': this.updateMeowText,
+                    'className': "form-control",
+                    'id': "meow",
+                    'name': "meow",
+                    'wrap': "soft"
+                    }
+                )),
         button({
-                'type': 'submit',
-                'id': 'postMeow',
-                'className': 'btn btn-primary'
+                'type': "submit",
+                'id': "postMeow",
+                'className': "btn btn-primary"
                 },
             'Meow'
             ))
