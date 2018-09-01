@@ -40,7 +40,7 @@ def appRender(self):
     profilePic = self.props.profilePic
     # if an agent handle already exists, there is no need to query for a handle
     if modalIsOpen and not appProperties.Agent_Handle:
-        return div(e(Modal, { 'show': modalIsOpen },
+        return div(None, e(Modal, { 'show': modalIsOpen },
             e(SettingsContainer, None)))
     return div({ 'className': "container" },
         div({ 'className': "spinner transition500" }),

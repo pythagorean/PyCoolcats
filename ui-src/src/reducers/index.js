@@ -5,7 +5,7 @@ const initialState = {
   appProperties: {},
   // posts with 'stamp' as their key
   posts: {},
-  modalIsOpen: false,
+  modalIsOpen: true,
   handles: {
     // userHash: handle
   },
