@@ -1,38 +1,36 @@
 __pragma__('js', '{}', '''
-import React from 'react'
+import { createElement as e } from 'react'
 import PropTypes from 'prop-types'
+const { div, button } = require('hyperscript-helpers')(e)
+''')
 
-const Faves = ({ addFavourite, favourites, hash, removeFavourite }) => {
-  return (
-    <div>
-      {favourites && favourites.includes(hash) ? (
-        <button
-          onClick={() => removeFavourite(hash)}
-          className="glyphicon glyphicon-heart"
-          style={{ color: 'red' }}
-        />
-      ) : (
-        <button
-          onClick={() => {
-            addFavourite(hash)
-          }}
-          className="glyphicon glyphicon-heart-empty"
-          style={{ color: 'red' }}
-        />
-      )}
-    </div>
-  )
-}
+def Faves(ref):
+    addFavourite = ref.addFavourite
+    favourites = ref.favourites
+    hash = ref.hash
+    removeFavourite = ref.removeFavourite
+
+    return div(None,
+        (favourites and favourites.includes(hash)) and button({
+            'onClick': lambda: removeFavourite(hash),
+            'className': "glyphicon glyphicon-heart",
+            'style': { 'color': "red" }
+            }
+        ) or button({
+            'onClick': lambda: addFavourite(hash),
+            'className': "glyphicon glyphicon-heart-empty",
+            'style': { 'color': "red" }
+            }
+        ))
 
 Faves.defaultProps = {
-  hash: '',
-  favourites: []
-}
+    'hash': '',
+    'favourites': []
+    }
 
 Faves.propTypes = {
-  addFavourite: PropTypes.func.isRequired,
-  removeFavourite: PropTypes.func.isRequired
-}
+    'addFavourite': PropTypes.func.isRequired,
+    'removeFavourite': PropTypes.func.isRequired
+    }
 
-export default Faves
-''')
+__pragma__('js', 'export default Faves')
