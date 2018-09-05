@@ -1,6 +1,6 @@
 {
-  "name": "pyclutter",
-  "version": "0.2.0",
+  "name": "coolcats",
+  "version": "0.2.1",
   "description": "clutter app for Holochain ported to Python",
   "main": "",
   "directories": {},
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pythagorean/pyclutter.git"
+    "url": "git+https://github.com/pythagorean/coolcats.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pythagorean/pyclutter/issues"
+    "url": "https://github.com/pythagorean/coolcats/issues"
   },
-  "homepage": "https://github.com/pythagorean/pyclutter#readme",
+  "homepage": "https://github.com/pythagorean/coolcats#readme",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "uglify-js": "^3.3.23"
