@@ -6,14 +6,14 @@ const { div, h2 } = require('hyperscript-helpers')(e)
 ''')
 
 def userFeedComponentDidUpdate(self, prevProps):
-    if prevProps.handle is not this.props.handle:
+    if prevProps.handle is not self.props.handle:
         self.setupForNewUser()
 
 def userFeedSetupForNewUser(self):
     self.props.getPosts(self.props.handle)
     if self.interval: clearInterval(self.interval)
     self.interval = setInterval(
-        (lambda: self.props.getPosts(this.props.handle)), 1000)
+        (lambda: self.props.getPosts(self.props.handle)), 1000)
 
 def userFeedComponentWillUnmount(self):
     if self.interval: clearInterval(self.interval)

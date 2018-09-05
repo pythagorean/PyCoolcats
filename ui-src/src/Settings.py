@@ -33,7 +33,7 @@ def settingsOnHandleSubmit(self, handle):
         return
 
     # check if a name has been set, and if not default to handle
-    if not getFirstName() or len(getFirstName()) > 1:
+    if not (getFirstName() and len(getFirstName()) > 1):
         setFirstName(newHandleText)
 
     toggleModal()
@@ -52,7 +52,7 @@ Settings = createReactClass({
                 p({
                         'className': "text-info",
                         'style': {
-                            'display': (this.state.newHandleText.length is 0 and this.props.handleTaken is False) and 'inline' or 'none'
+                            'display': (len(this.state.newHandleText) is 0 and this.props.handleTaken is False) and 'inline' or 'none'
                             }
                         },
                     "Set your handle to get meowing"

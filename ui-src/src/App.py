@@ -73,7 +73,7 @@ def appRender(self):
                         div({ 'id': "banner" },
                             e(Link,
                                 { 'to': "/" },
-                                "Clutter"
+                                "Coolcats (Clutter)"
                                 ),
                             div({ 'className': "subtitle" },
                                 "can haz herd cats?"
