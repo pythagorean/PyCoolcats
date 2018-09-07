@@ -17,6 +17,10 @@ const { div, img, h2, p, a, em, strong } = require('hyperscript-helpers')(e)
 DEFAULT_PROFILE_PIC = '/cat-eating-bird-circle.png'
 
 def appComponentWillMount(self):
+    # if the server has reset we need to reset our state too
+    if not self.props.appProperties.Agent_Handle:
+        self.props.resetState()
+
     # this fetches the hash which represents the active users userHash
     self.props.getMyHandle()
     self.props.getHandles()

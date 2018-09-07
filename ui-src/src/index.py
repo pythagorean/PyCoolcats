@@ -7,12 +7,7 @@ import registerServiceWorker from './registerServiceWorker'
 import CreateStore from './store'
 ''')
 
-store = CreateStore()
-
-ReactDOM.render(e(Root, {
-        'store': store['store'],
-        'persistor': store['persistor']
-        }),
+ReactDOM.render(e(Root, CreateStore()),
     document.getElementById('root'));
 
 registerServiceWorker()
