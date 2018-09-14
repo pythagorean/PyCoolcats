@@ -276,6 +276,17 @@ def useHandle(handle):
             handle +
             ' to "directory_links"</mermaid>')
         return useHandleKey
+    elif getAgent(handle) is App.Key.Hash:
+        # Logged out user is requesting old handle
+        useHandleKey = hc_makeHash('handle', anchor('handle', handle))
+        hc_commit('handle_links', {
+            'Links': [{
+                'Base': App.Key.Hash,
+                'Link': useHandleKey,
+                'Tag': 'handle'
+                }]
+            })
+        return useHandleKey
     else:
         # hc_debug('HandleInUse')
         return 'HandleInUse'
@@ -286,6 +297,22 @@ def getHandle(agentKey):
     if len(links) > 0:
         anchorHash = links[0].Entry.replace('"', '')
         return hc_get(anchorHash).anchorText
+    else:
+        return ''
+
+def logOut(agentKey):
+    handles = hc_getLinks(agentKey, 'handle')
+    if len(handles) > 0:
+        handleKey = handles[0].Hash
+        hc_commit('handle_links', {
+            'Links': [{
+                'Base': agentKey,
+                'Link': handleKey,
+                'Tag': 'handle',
+                'LinkAction': HC.LinkAction.Del
+                }]
+            })
+        return 'LoggedOut'
     else:
         return ''
 
