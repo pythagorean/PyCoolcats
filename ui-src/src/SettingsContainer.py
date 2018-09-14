@@ -1,7 +1,7 @@
 __pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import Settings from './Settings'
-import { appProperty, getFirstName, newHandle, setFirstName, toggleModal } from './actions'
+import { appProperty, getFirstName, useHandle, setFirstName, toggleModal } from './actions'
 ''')
 
 mapStateToProps = lambda state: {
@@ -18,8 +18,8 @@ mapDispatchToProps = lambda dispatch: {
     'getMyHandle': lambda: dispatch(
         appProperty('Agent_Handle')),
 
-    'newHandle': lambda handle, then: dispatch(
-        newHandle(handle)),
+    'useHandle': lambda handle, then: dispatch(
+        useHandle(handle)),
 
     'setFirstName': lambda firstName: dispatch(
         setFirstName(firstName)),

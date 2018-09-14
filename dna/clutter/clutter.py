@@ -175,7 +175,7 @@ def appProperty(name):
     if name == 'App_DNA_Hash':     return App.DNA.Hash
     return 'Error: No App Property with name: ' + name
 
-def newHandle(handle):
+def useHandle(handle):
     hc_debug('<mermaid>' +
         App.Agent.String +
         '-->>DHT:Check to see if ' +
@@ -238,7 +238,7 @@ def newHandle(handle):
             # hc_debug('HandleInUse')
             return 'HandleInUse'
     if anchorExists('handle', handle) == 'false':
-        newHandleKey = hc_commit('handle', anchor('handle', handle))
+        useHandleKey = hc_commit('handle', anchor('handle', handle))
         hc_debug('<mermaid>' +
             App.Agent.String +
             '->>' +
@@ -254,19 +254,19 @@ def newHandle(handle):
         hc_commit('handle_links', {
             'Links': [{
                 'Base': App.Key.Hash,
-                'Link': newHandleKey,
+                'Link': useHandleKey,
                 'Tag': 'handle'
                 }]
             })
         hc_debug('<mermaid>' +
             App.Agent.String +
             '->>DHT:Link ' +
-            newHandleKey +
+            useHandleKey +
             ' to "handle_links"</mermaid>')
         hc_commit('directory_links', {
             'Links': [{
                 'Base': App.DNA.Hash,
-                'Link': newHandleKey,
+                'Link': useHandleKey,
                 'Tag': 'directory'
                 }]
             })
@@ -275,7 +275,7 @@ def newHandle(handle):
             '->>DHT:Link ' +
             handle +
             ' to "directory_links"</mermaid>')
-        return newHandleKey
+        return useHandleKey
     else:
         # hc_debug('HandleInUse')
         return 'HandleInUse'
