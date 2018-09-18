@@ -243,7 +243,7 @@ def useHandle(handle):
             App.Agent.String +
             '->>' +
             App.Agent.String +
-            ':commit new handle' +
+            ':commit new handle ' +
             handle +
             '</mermaid>')
         hc_debug('<mermaid>' +
@@ -279,6 +279,18 @@ def useHandle(handle):
     elif getAgent(handle) is App.Key.Hash:
         # Logged out user is requesting old handle
         useHandleKey = hc_makeHash('handle', anchor('handle', handle))
+        hc_debug('<mermaid>' +
+            App.Agent.String +
+            '->>' +
+            App.Agent.String +
+            ':restore handle ' +
+            handle +
+            '</mermaid>')
+        hc_debug('<mermaid>' +
+            App.Agent.String +
+            '->>DHT:Publish ' +
+            handle +
+            '</mermaid>')
         hc_commit('handle_links', {
             'Links': [{
                 'Base': App.Key.Hash,
@@ -286,6 +298,11 @@ def useHandle(handle):
                 'Tag': 'handle'
                 }]
             })
+        hc_debug('<mermaid>' +
+            App.Agent.String +
+            '->>DHT:Link ' +
+            useHandleKey +
+            ' to "handle_links"</mermaid>')
         return useHandleKey
     else:
         # hc_debug('HandleInUse')
@@ -300,13 +317,19 @@ def getHandle(agentKey):
     else:
         return ''
 
-def logOut(agentKey):
-    handles = hc_getLinks(agentKey, 'handle')
+def logOut():
+    handles = hc_getLinks(App.Key.Hash, 'handle')
     if len(handles) > 0:
         handleKey = handles[0].Hash
+        hc_debug('<mermaid>' +
+            App.Agent.String +
+            '->>' +
+            App.Agent.String +
+            ':logout from handle' +
+            '</mermaid>')
         hc_commit('handle_links', {
             'Links': [{
-                'Base': agentKey,
+                'Base': App.Key.Hash,
                 'Link': handleKey,
                 'Tag': 'handle',
                 'LinkAction': HC.LinkAction.Del

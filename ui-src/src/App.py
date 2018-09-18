@@ -11,10 +11,17 @@ import NewMeowContainer from './NewMeowContainer'
 import SettingsContainer from './SettingsContainer'
 import UserFeedContainer from './UserFeedContainer'
 import HashtagFeedContainer from './HashtagFeedContainer'
-const { div, img, h2, p, a, em, strong } = require('hyperscript-helpers')(e)
+const { div, img, h2, p, a, em, strong, form, button } = require('hyperscript-helpers')(e)
 ''')
 
 DEFAULT_PROFILE_PIC = '/cat-eating-bird-circle.png'
+
+def appOnLogoutSubmit(self):
+    logOut = self.props.logOut
+    history = self.props.history
+
+    logOut()
+    history.push('/')
 
 def appComponentWillMount(self):
     # if the server has reset we need to reset our state too
@@ -124,7 +131,19 @@ def appRender(self):
                                     "holochain.org"
                                     ),
                                 "."
-                                ))))),
+                                ),
+                            form({
+                                    'onSubmit': self.onLogoutSubmit,
+                                    'id': "logout-form",
+                                    'action': ""
+                                    },
+                                button({
+                                        'type': "submit",
+                                        'id': "logout",
+                                        'className': "btn btn-default btn-sm"
+                                        },
+                                    "Logout"
+                                    )))))),
             div({ 'className': "row" },
                 div({ 'className': "contentcontainer", 'id': "feedContent" },
                     div(None,
@@ -133,6 +152,8 @@ def appRender(self):
                         )))))
 
 App = createReactClass({
+    'onLogoutSubmit': lambda: appOnLogoutSubmit(this),
+
     'componentWillMount': lambda: appComponentWillMount(this),
 
     'componentDidUpdate': lambda prevProps: appComponentDidUpdate(this, prevProps),

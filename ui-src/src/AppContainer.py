@@ -1,12 +1,15 @@
 __pragma__('js', '{}', '''
 import { connect } from 'react-redux'
 import App from './App'
-import { appProperty, resetState, getFirstName, getHandle, getHandles, getFollow, getPostsBy, getProfilePic } from './actions'
+import { logOut, resetState, getFirstName, appProperty, getHandle, getHandles, getFollow, getPostsBy, getProfilePic } from './actions'
 ''')
 
 mapStateToProps = lambda state: __pragma__('js', '{}', '{ ...state }')
 
 mapDispatchToProps = lambda dispatch: {
+    'logOut': lambda: dispatch(
+        logOut()),
+
     'resetState': lambda: dispatch(
         resetState()),
 

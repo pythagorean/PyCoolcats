@@ -20,11 +20,11 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, clutterApp)
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 function CreateStore() {
-  let store = createStore(
-    persistedReducer,
-    undefined,
-    composeEnhancers(applyMiddleware(...middleware)))
+  let enhancedCreateStore = composeEnhancers(
+    applyMiddleware(...middleware))(createStore)
+  let store = enhancedCreateStore(persistedReducer)
   let persistor = persistStore(store)
   return { store, persistor }
 }

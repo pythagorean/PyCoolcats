@@ -8,7 +8,6 @@ MAX_HANDLE_LENGTH = 20
 
 def settingsOnHandleSubmit(self, handle):
     getFirstName = self.props.getFirstName
-    handles = self.props.handles
     useHandle = self.props.useHandle
     setFirstName = self.props.setFirstName
     toggleModal = self.props.toggleModal
@@ -25,12 +24,6 @@ def settingsOnHandleSubmit(self, handle):
         return
 
     useHandle(useHandleText)
-
-    handleExists = handles.find(
-        lambda handleObj: handleObj.handle is useHandleText)
-    if handleExists:
-        useHandle('')
-        return
 
     # check if a name has been set, and if not default to handle
     if not (getFirstName() and len(getFirstName()) > 1):
