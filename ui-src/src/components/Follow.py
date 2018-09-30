@@ -51,7 +51,7 @@ def followRender(self):
                                                 'type': 'button',
                                                 'className': 'btn btn-default',
                                                 'onClick':
-                                                    lambda: (self.props.unfollow(user.handle)).bind(self)
+                                                    lambda: self.props.unfollow(user.handle)
                                                 },
                                             'Unfollow'
                                             )))))))),
