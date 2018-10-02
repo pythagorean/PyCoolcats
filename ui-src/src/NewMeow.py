@@ -1,5 +1,5 @@
 __pragma__('js', '{}', '''
-import { createElement as e } from 'react'
+import { createRef, createElement as e } from 'react'
 import createReactClass from 'create-react-class'
 const { form, div, textarea, label, input, button } = require('hyperscript-helpers')(e)
 ''')
@@ -8,7 +8,9 @@ def newMeowOnSubmit(self, meow):
     meow.preventDefault()
     if not self.state['newMeowText']: return
     if self.state['newMeowImage']:
-        alert('Has attachment: ' + self.state['newMeowImage'])
+        alert('Has attachment (' +
+            self.inputImage.current.files[0]['name'] + '): ' +
+            self.state['newMeowImage'])
         self.setState({ 'newMeowImage': "" })
     self.props.post(self.state['newMeowText'])
     self.setState({ 'newMeowText': "" })
@@ -37,6 +39,8 @@ NewMeow = createReactClass({
     'updateMeowText': lambda meow: this.setState({
         'newMeowText': meow.target.value
         }),
+
+    'inputImage': createRef(),
 
     'updateImage': lambda file: newMeowUpdateImage(this, file),
 
@@ -73,7 +77,7 @@ NewMeow = createReactClass({
         input({
                 'type': "file",
                 'accept': "image/*",
-                'ref': this.state.newMeowImage,
+                'ref': this.inputImage,
                 'onChange': this.updateImage,
                 'hidden': True,
                 'id': "image",
