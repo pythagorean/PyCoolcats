@@ -8,10 +8,9 @@ def newMeowOnSubmit(self, meow):
     meow.preventDefault()
     if not self.state['newMeowText']: return
     if self.state['newMeowImage']:
-        alert('Has attachment (' +
-            self.inputImage.current.files[0]['name'] + '): ' +
-            self.state['newMeowImage'])
+        alert('Has attachment: ' + self.state['newMeowImage'])
         self.setState({ 'newMeowImage': "" })
+        self.inputImage.current.value = ""
     self.props.post(self.state['newMeowText'])
     self.setState({ 'newMeowText': "" })
 
