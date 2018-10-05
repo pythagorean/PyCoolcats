@@ -1,6 +1,7 @@
 __pragma__('js', '{}', '''
 import { createRef, createElement as e } from 'react'
 import createReactClass from 'create-react-class'
+import Jimp from 'jimp/es'
 const { form, div, textarea, label, input, button } = require('hyperscript-helpers')(e)
 ''')
 
@@ -8,7 +9,10 @@ def newMeowOnSubmit(self, meow):
     meow.preventDefault()
     if not self.state['newMeowText']: return
     if self.state['newMeowImage']:
-        alert('Has attachment: ' + self.state['newMeowImage'])
+        Jimp.read(self.state['newMeowImage']).then(
+            lambda image: alert(
+                "Has " + image.bitmap.width + "x" + image.bitmap.height +
+                " attachment."))
         self.setState({ 'newMeowImage': "" })
         self.inputImage.current.value = ""
     self.props.post(self.state['newMeowText'])
