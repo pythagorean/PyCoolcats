@@ -5,17 +5,21 @@ import Jimp from 'jimp/es'
 const { form, div, textarea, label, input, button } = require('hyperscript-helpers')(e)
 ''')
 
+def newMeowAttach(self, posted):
+    if not self.state['newMeowImage']: return
+    Jimp.read(self.state['newMeowImage']).then(
+        lambda image: image.scaleToFit(200, 150).getBase64(Jimp.MIME_PNG,
+            lambda err, thumbnail: not err and alert(
+                "Attach thumbnail to " + posted + ":\n\n" + thumbnail)
+            ))
+    self.setState({ 'newMeowImage': "" })
+    self.inputImage.current.value = ""
+
 def newMeowOnSubmit(self, meow):
     meow.preventDefault()
     if not self.state['newMeowText']: return
-    if self.state['newMeowImage']:
-        Jimp.read(self.state['newMeowImage']).then(
-            lambda image: alert(
-                "Has " + image.bitmap.width + "x" + image.bitmap.height +
-                " attachment."))
-        self.setState({ 'newMeowImage': "" })
-        self.inputImage.current.value = ""
-    self.props.post(self.state['newMeowText'])
+    self.props.post(self.state['newMeowText'],
+        lambda posted: newMeowAttach(self, posted))
     self.setState({ 'newMeowText': "" })
 
 def newMeowUpdateImage(self, file):
