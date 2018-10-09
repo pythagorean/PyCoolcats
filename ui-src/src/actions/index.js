@@ -9,8 +9,9 @@ export const GET_HANDLES = 'getHandles'
 export const GET_FOLLOW = 'getFollow'
 export const APP_PROPERTY = 'appProperty'
 export const POST = 'post'
-export const GET_POST = 'getPost'
+export const POST_IMAGE_ATTACHMENT = 'postImageAttachment'
 export const POST_MOD = 'postMod'
+export const GET_POST = 'getPost'
 export const FOLLOW = 'follow'
 export const GET_POSTS_BY = 'getPostsBy'
 export const GET_POSTS_HASHTAG = 'getPostsWithHashtag'
@@ -202,14 +203,15 @@ export function post(message, then) {
   }
 }
 
-export function getPost(postHash, then) {
+export function postImageAttachment(postHash, thumbnail, then) {
   return {
-    type: GET_POST,
+    type: POST_IMAGE_ATTACHMENT,
     meta: {
       isHc: true,
       namespace: 'clutter',
       data: {
-        postHash
+        postHash,
+        attach: thumbnail
       },
       then
     }
@@ -228,6 +230,20 @@ export function postMod(hash, message, then) {
           message,
           stamp: new Date().valueOf()
         }
+      },
+      then
+    }
+  }
+}
+
+export function getPost(postHash, then) {
+  return {
+    type: GET_POST,
+    meta: {
+      isHc: true,
+      namespace: 'clutter',
+      data: {
+        postHash
       },
       then
     }

@@ -17,7 +17,7 @@
       "Name": "clutter",
       "Description": "zome that implements micro-blogging",
       "RibosomeType": "js",
-      "CodeFile": "__javascript__/clutter.js",
+      "CodeFile": "__javascript__/clutter.min.js",
       "Config": {
         "ErrorHandling": "throwErrors"
       },
@@ -145,12 +145,22 @@
           "Exposure": "public"
         },
         {
-          "Name": "getPost",
+          "Name": "postImageAttachment",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getImageAttachment",
           "CallingType": "json",
           "Exposure": "public"
         },
         {
           "Name": "postMod",
+          "CallingType": "json",
+          "Exposure": "public"
+        },
+        {
+          "Name": "getPost",
           "CallingType": "json",
           "Exposure": "public"
         },
@@ -200,7 +210,7 @@
       "Name": "anchors",
       "Description": "anchors mixin",
       "RibosomeType": "js",
-      "CodeFile": "__javascript__/anchors.js",
+      "CodeFile": "__javascript__/anchors.min.js",
       "Config": {
         "ErrorHandling": "throwErrors"
       },

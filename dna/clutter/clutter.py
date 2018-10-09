@@ -451,6 +451,14 @@ def postMod(params):
     #     ]}
     return key
 
+def postImageAttachment(params):
+    hc_debug("postImageAttachment: " + params.postHash + ", " + params.attach[:40] + "...")
+    return "postImageAttachment called"
+
+def getImageAttachment(params):
+    hc_debug("getImageAttachment: " + params.postHash)
+    return "getImageAttachment called"
+
 # TODO add "last 10" or "since timestamp" when query info is supported
 def getPostsBy(handles):
     hc_debug(handles)

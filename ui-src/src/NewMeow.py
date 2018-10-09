@@ -8,10 +8,13 @@ const { form, div, textarea, label, input, button } = require('hyperscript-helpe
 def newMeowAttach(self, posted):
     if not self.state['newMeowImage']: return
     Jimp.read(self.state['newMeowImage']).then(
-        lambda image: image.scaleToFit(200, 150).getBase64(Jimp.MIME_PNG,
-            lambda err, thumbnail: not err and alert(
-                "Attach thumbnail to " + posted + ":\n\n" + thumbnail)
-            ))
+        lambda image: (image
+            .scaleToFit(200, 150)
+            .rgba(False)
+            .getBase64(Jimp.MIME_PNG,
+                lambda _err, thumbnail: (
+                    self.props.postImageAttachment(posted, thumbnail)
+                    ))))
     self.setState({ 'newMeowImage': "" })
     self.inputImage.current.value = ""
 
@@ -24,9 +27,6 @@ def newMeowOnSubmit(self, meow):
 
 def newMeowUpdateImage(self, file):
     input = file.target
-    if input.size > 2000000:
-        alert('File is too big!')
-        return
     self.upload(input.files[0]).then(
         lambda dataURL: self.setState({
             'newMeowImage': dataURL
