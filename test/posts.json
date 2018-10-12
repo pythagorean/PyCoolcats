@@ -45,33 +45,6 @@
       "Regexp": ""
     },
     {
-      "Convey": "We can attach a thumbnail image",
-      "Zome": "clutter",
-      "FnName": "postImageAttachment",
-      "Input": {
-        "postHash": "%h1%",
-        "attach": "Thumbnail image attachment"
-      },
-      "Output": "postImageAttachment called",
-      "Exposure": "public",
-      "Err": "",
-      "Regexp": ""
-    },
-    {
-      "Convey": "We can retrieve a thumbnail image",
-      "Zome": "clutter",
-      "FnName": "getImageAttachment",
-      "Input": {
-        "postHash": "%h1%"
-      },
-      "Output": {
-        "attach": "Thumbnail image attachment"
-      },
-      "Exposure": "public",
-      "Err": "",
-      "Regexp": ""
-    },
-    {
       "Zome": "clutter",
       "FnName": "appProperty",
       "Input": "App_Key_Hash",

@@ -452,12 +452,20 @@ def postMod(params):
     return key
 
 def postImageAttachment(params):
-    hc_debug("postImageAttachment: " + params.postHash + ", " + params.attach[:40] + "...")
-    return "postImageAttachment called"
+    imageAttachment = {
+        'post': params.postHash,
+        'image': params.attach
+        }
+    return hc_commit('image', imageAttachment)
 
 def getImageAttachment(params):
-    hc_debug("getImageAttachment: " + params.postHash)
-    return "getImageAttachment called"
+    constraint = {
+        'Constrain': {
+            'EntryTypes': ['image'],
+            'Contains': '{"post": "' + params.postHash + '"}'
+            }
+        }
+    return hc_query(constraint)[0]['image']
 
 # TODO add "last 10" or "since timestamp" when query info is supported
 def getPostsBy(handles):
@@ -573,6 +581,10 @@ def validate(entry_type, entry, header, sources):
     if entry_type == 'handle':
         return True
     if entry_type == 'follow':
+        return True
+    if entry_type == 'image':
+        # Should make sure it meets thumbnail type and size limits
+        hc_debug("validate image: " + entry.post + ", " + entry.image[:40] + "...")
         return True
     return True
 

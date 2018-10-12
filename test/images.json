@@ -1,0 +1,52 @@
+{
+  "Tests": [
+    {
+      "Convey": "setup handle for posting",
+      "Zome": "clutter",
+      "FnName": "useHandle",
+      "Input": "imagetester",
+      "Output": "%h2%",
+      "Exposure": "public",
+      "Err": "",
+      "Regexp": ""
+    },
+    {
+      "Convey": "create a new post",
+      "Zome": "clutter",
+      "FnName": "post",
+      "Input": {
+        "message": "here is a test post",
+        "stamp": 12345
+      },
+      "Output": "%h1%",
+      "Exposure": "public",
+      "Err": "",
+      "Regexp": ""
+    },
+    {
+      "Convey": "We can attach a thumbnail image",
+      "Zome": "clutter",
+      "FnName": "postImageAttachment",
+      "Input": {
+        "postHash": "%h1%",
+        "attach": "Thumbnail image attachment"
+      },
+      "Output": "%h0%",
+      "Exposure": "public",
+      "Err": "",
+      "Regexp": ""
+    },
+    {
+      "Convey": "We can retrieve a thumbnail image",
+      "Zome": "clutter",
+      "FnName": "getImageAttachment",
+      "Input": {
+        "postHash": "%h2%"
+      },
+      "Output": "Thumbnail image attachment",
+      "Exposure": "public",
+      "Err": "",
+      "Regexp": ""
+    }
+  ]
+}
