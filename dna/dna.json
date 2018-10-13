@@ -44,10 +44,9 @@
           "SchemaFile": "post.json"
         },
         {
-          "Name": "image",
-          "DataFormat": "json",
-          "Sharing": "public",
-          "SchemaFile": "image.json"
+          "Name": "image_small",
+          "DataFormat": "string",
+          "Sharing": "public"
         },
         {
           "Name": "favourites",

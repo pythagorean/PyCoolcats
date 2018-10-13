@@ -11,26 +11,10 @@
       "Regexp": ""
     },
     {
-      "Convey": "create a new post",
-      "Zome": "clutter",
-      "FnName": "post",
-      "Input": {
-        "message": "here is a test post",
-        "stamp": 12345
-      },
-      "Output": "%h1%",
-      "Exposure": "public",
-      "Err": "",
-      "Regexp": ""
-    },
-    {
-      "Convey": "We can attach a thumbnail image",
+      "Convey": "We can post a thumbnail image",
       "Zome": "clutter",
       "FnName": "postImageAttachment",
-      "Input": {
-        "postHash": "%h1%",
-        "attach": "Thumbnail image attachment"
-      },
+      "Input": "data:image/png;base64,test",
       "Output": "%h0%",
       "Exposure": "public",
       "Err": "",
@@ -40,10 +24,46 @@
       "Convey": "We can retrieve a thumbnail image",
       "Zome": "clutter",
       "FnName": "getImageAttachment",
+      "Input": "%h0%",
+      "Output": "data:image/png;base64,test",
+      "Exposure": "public",
+      "Err": "",
+      "Regexp": ""
+    },
+    {
+      "Convey": "We can create a new post with thumbnail image attachment",
+      "Zome": "clutter",
+      "FnName": "post",
       "Input": {
-        "postHash": "%h2%"
+        "message": "here is a test post",
+        "stamp": 12345,
+        "attachment": {
+          "image_small": "%h0%"
+        }
       },
-      "Output": "Thumbnail image attachment",
+      "Output": "%h1%",
+      "Exposure": "public",
+      "Err": "",
+      "Regexp": ""
+    },
+    {
+      "Convey": "We can retrieve a single post with thumbnail image attachment",
+      "Zome": "clutter",
+      "FnName": "getPost",
+      "Input": {
+        "postHash": "%h1%"
+      },
+      "Output": {
+        "H": "%h1%",
+        "author": "imagetester",
+        "post": {
+          "message": "here is a test post",
+          "stamp": 12345,
+          "attachment": {
+            "image_small": "%h2%"
+          }
+        }
+      },
       "Exposure": "public",
       "Err": "",
       "Regexp": ""

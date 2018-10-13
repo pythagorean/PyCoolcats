@@ -2,15 +2,19 @@
 var dict = function (anObject) {
 	return anObject;
 };
+
 var list = function (iterable) {
 	return iterable;
-}
+};
+
 var len = function (anObject) {
 	return anObject.length;
 };
+
 Array.prototype.append = function (element) {
 	this.push(element);
 };
+
 String.prototype.__getslice__ = function (start, stop, step) {
 	if (start < 0) {
 		start = this.length + start;
@@ -32,6 +36,23 @@ String.prototype.__getslice__ = function (start, stop, step) {
 	}
   return result;
 };
+
 String.prototype.py_replace = function (old, aNew, maxreplace) {
 	return this.split(old, maxreplace).join(aNew);
+};
+
+var __in__ = function (element, container) {
+		if (container === undefined || container === null) {
+				return false;
+		}
+		if (container.__contains__ instanceof Function) {
+				return container.__contains__ (element);
+		}
+		else {
+				return (
+						container.indexOf ?
+						container.indexOf (element) > -1 :
+						container.hasOwnProperty (element)
+				);
+		}
 };

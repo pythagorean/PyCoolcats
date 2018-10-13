@@ -451,21 +451,13 @@ def postMod(params):
     #     ]}
     return key
 
-def postImageAttachment(params):
-    imageAttachment = {
-        'post': params.postHash,
-        'image': params.attach
-        }
-    return hc_commit('image', imageAttachment)
+def postImageAttachment(dataURL):
+    key = hc_commit('image_small', dataURL)
+    return key
 
-def getImageAttachment(params):
-    constraint = {
-        'Constrain': {
-            'EntryTypes': ['image'],
-            'Contains': '{"post": "' + params.postHash + '"}'
-            }
-        }
-    return hc_query(constraint)[0]['image']
+def getImageAttachment(key):
+    dataURL = hc_get(key)
+    return dataURL
 
 # TODO add "last 10" or "since timestamp" when query info is supported
 def getPostsBy(handles):
@@ -575,16 +567,30 @@ def validatePut(entry_type, entry, header, pkg, sources):
 
 def validate(entry_type, entry, header, sources):
     if entry_type == 'post':
+        fields = ['message','stamp','attachment']
+        for key in Object.js_keys(entry):
+            if key not in fields: return False
+            if key is 'attachment':
+                attach_types = Object.js_keys(entry.attachment)
+                if len(attach_types) is not 1: return False
+                if attach_types[0] is not 'image_small': return False
+                if hc_get(entry.attachment.image_small,
+                    { 'GetMask': HC.GetMask.EntryType }) is not 'image_small':
+                    return False
         l = len(entry.message)
-        if l > 0 and l < 256: return True
-        return False
+        if l < 1 or l > 255: return False
+        return True
     if entry_type == 'handle':
         return True
     if entry_type == 'follow':
         return True
-    if entry_type == 'image':
-        # Should make sure it meets thumbnail type and size limits
-        hc_debug("validate image: " + entry.post + ", " + entry.image[:40] + "...")
+    if entry_type == 'image_small':
+        image = entry
+        prefix = "data:image/png;base64,"
+        prefix_len = len(prefix)
+        maxsize = 200 * 150 * 4 + prefix_len
+        if image[:prefix_len] is not prefix or len(image) > maxsize:
+            return False
         return True
     return True
 
