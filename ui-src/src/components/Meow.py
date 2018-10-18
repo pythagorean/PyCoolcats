@@ -2,6 +2,7 @@ __pragma__('js', '{}', '''
 import { createElement as e } from 'react'
 import createReactClass from 'create-react-class'
 import { Link } from 'react-router-dom'
+import AttachmentContainer from '../AttachmentContainer'
 import FavesContainer from '../FavesContainer'
 const { div, a } = require('hyperscript-helpers')(e)
 ''')
@@ -55,7 +56,8 @@ def meowRender(self):
         e(Link, { 'to': "/meow/" + hash, 'className': "stamp" },
             __new__(Date(stamp)).toString()),
         div({ 'className': "message" },
-            self.urlify(message)),
+            self.urlify(message), ' ',
+            e(AttachmentContainer, { 'post': post })),
         e(FavesContainer, { 'hash': hash }))
 
 Meow = createReactClass({

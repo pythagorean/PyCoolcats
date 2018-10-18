@@ -1,3 +1,5 @@
+__pragma__('noalias', 'keys') # use js_keys
+
 FIRST_NAME = 'firstName'
 FAVOURITES = 'favourites'
 PROFILE_PIC = 'profilePic'
@@ -452,11 +454,13 @@ def postMod(params):
     return key
 
 def postImageAttachment(dataURL):
+    hc_debug('postImageAttachment: ' + dataURL[:40])
     key = hc_commit('image_small', dataURL)
     return key
 
 def getImageAttachment(key):
     dataURL = hc_get(key)
+    hc_debug('getImageAttachment: ' + dataURL[:40])
     return dataURL
 
 # TODO add "last 10" or "since timestamp" when query info is supported
@@ -568,10 +572,10 @@ def validatePut(entry_type, entry, header, pkg, sources):
 def validate(entry_type, entry, header, sources):
     if entry_type == 'post':
         fields = ['message','stamp','attachment']
-        for key in Object.js_keys(entry):
+        for key in Object.keys(entry):
             if key not in fields: return False
             if key is 'attachment':
-                attach_types = Object.js_keys(entry.attachment)
+                attach_types = Object.keys(entry.attachment)
                 if len(attach_types) is not 1: return False
                 if attach_types[0] is not 'image_small': return False
                 if hc_get(entry.attachment.image_small,

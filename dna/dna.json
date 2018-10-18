@@ -151,12 +151,12 @@
         },
         {
           "Name": "postImageAttachment",
-          "CallingType": "json",
+          "CallingType": "string",
           "Exposure": "public"
         },
         {
           "Name": "getImageAttachment",
-          "CallingType": "json",
+          "CallingType": "string",
           "Exposure": "public"
         },
         {

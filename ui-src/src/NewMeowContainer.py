@@ -7,10 +7,10 @@ import { post, postImageAttachment } from './actions'
 mapStateToProps = lambda: {}
 
 mapDispatchToProps = lambda dispatch: {
-    'post': lambda message, then: dispatch(
-        post(message, then)),
-    'postImageAttachment': lambda postHash, thumbnail, then: dispatch(
-        postImageAttachment(postHash, thumbnail, then))
+    'post': lambda message, attachment, then: dispatch(
+        post(message, attachment, then)),
+    'postImageAttachment': lambda thumbnail, then: dispatch(
+        postImageAttachment(thumbnail, then))
     }
 
 __pragma__('js',

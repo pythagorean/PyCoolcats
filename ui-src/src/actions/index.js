@@ -9,9 +9,10 @@ export const GET_HANDLES = 'getHandles'
 export const GET_FOLLOW = 'getFollow'
 export const APP_PROPERTY = 'appProperty'
 export const POST = 'post'
-export const POST_IMAGE_ATTACHMENT = 'postImageAttachment'
 export const POST_MOD = 'postMod'
 export const GET_POST = 'getPost'
+export const POST_IMAGE_ATTACHMENT = 'postImageAttachment'
+export const GET_IMAGE_ATTACHMENT = 'getImageAttachment'
 export const FOLLOW = 'follow'
 export const GET_POSTS_BY = 'getPostsBy'
 export const GET_POSTS_HASHTAG = 'getPostsWithHashtag'
@@ -188,8 +189,8 @@ export function appProperty(key, then) {
   }
 }
 
-export function post(message, then) {
-  return {
+export function post(message, attachment, then) {
+  var postdata = {
     type: POST,
     meta: {
       isHc: true,
@@ -201,18 +202,19 @@ export function post(message, then) {
       then
     }
   }
+  if (typeof attachment && attachment) {
+    postdata.meta.data['attachment'] = attachment
+  }
+  return postdata
 }
 
-export function postImageAttachment(postHash, thumbnail, then) {
+export function postImageAttachment(thumbnail, then) {
   return {
     type: POST_IMAGE_ATTACHMENT,
     meta: {
       isHc: true,
       namespace: 'clutter',
-      data: {
-        postHash,
-        attach: thumbnail
-      },
+      data: thumbnail,
       then
     }
   }
@@ -239,6 +241,20 @@ export function postMod(hash, message, then) {
 export function getPost(postHash, then) {
   return {
     type: GET_POST,
+    meta: {
+      isHc: true,
+      namespace: 'clutter',
+      data: {
+        postHash
+      },
+      then
+    }
+  }
+}
+
+export function getImageAttachment(postHash, then) {
+  return {
+    type: GET_IMAGE_ATTACHMENT,
     meta: {
       isHc: true,
       namespace: 'clutter',

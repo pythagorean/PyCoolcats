@@ -5,25 +5,25 @@ import Jimp from 'jimp/es'
 const { form, div, textarea, label, input, button } = require('hyperscript-helpers')(e)
 ''')
 
-def newMeowAttach(self, posted):
-    if not self.state['newMeowImage']: return
-    Jimp.read(self.state['newMeowImage']).then(
+def newMeowOnSubmit(self, meow):
+    meow.preventDefault()
+    newMeowText = self.state['newMeowText']
+    newMeowImage = self.state['newMeowImage']
+    if not newMeowText: return
+    postImageAttachment = self.props.postImageAttachment
+    post = self.props.post
+    if newMeowImage: Jimp.read(newMeowImage).then(
         lambda image: (image
             .scaleToFit(200, 150)
             .rgba(False)
             .getBase64(Jimp.MIME_PNG,
-                lambda _err, thumbnail: (
-                    self.props.postImageAttachment(posted, thumbnail)
+                lambda _err, thumbnail: postImageAttachment(thumbnail,
+                    lambda attach: post(newMeowText, { 'image_small': attach })
                     ))))
+    else: post(newMeowText)
+    self.setState({ 'newMeowText': "" })
     self.setState({ 'newMeowImage': "" })
     self.inputImage.current.value = ""
-
-def newMeowOnSubmit(self, meow):
-    meow.preventDefault()
-    if not self.state['newMeowText']: return
-    self.props.post(self.state['newMeowText'],
-        lambda posted: newMeowAttach(self, posted))
-    self.setState({ 'newMeowText': "" })
 
 def newMeowUpdateImage(self, file):
     input = file.target
