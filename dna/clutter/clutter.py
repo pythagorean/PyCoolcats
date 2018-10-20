@@ -453,14 +453,14 @@ def postMod(params):
     #     ]}
     return key
 
-def postImageAttachment(dataURL):
-    hc_debug('postImageAttachment: ' + dataURL[:40])
+def postImageSmall(dataURL):
+    hc_debug('postImageSmall: ' + dataURL[:40])
     key = hc_commit('image_small', dataURL)
     return key
 
-def getImageAttachment(key):
+def getImageSmall(key):
     dataURL = hc_get(key)
-    hc_debug('getImageAttachment: ' + dataURL[:40])
+    hc_debug('getImageSmall: ' + dataURL[:40])
     return dataURL
 
 # TODO add "last 10" or "since timestamp" when query info is supported

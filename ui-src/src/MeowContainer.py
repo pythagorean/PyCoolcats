@@ -18,7 +18,8 @@ def mapStateToProps(state, ownProps):
     return { 'post': post }
 
 mapDispatchToProps = lambda dispatch, ownProps: {
-    'getPost': lambda: dispatch(getPost(ownProps.match.params.meowHash))
+    'getPost': lambda: dispatch(
+        getPost(ownProps.match.params.meowHash))
     }
 
 __pragma__('js', 'export default connect(mapStateToProps, mapDispatchToProps)(Meow)')

@@ -13,7 +13,7 @@
     {
       "Convey": "We can post a thumbnail image",
       "Zome": "clutter",
-      "FnName": "postImageAttachment",
+      "FnName": "postImageSmall",
       "Input": "data:image/png;base64,test",
       "Output": "%h0%",
       "Exposure": "public",
@@ -23,7 +23,7 @@
     {
       "Convey": "We can retrieve a thumbnail image",
       "Zome": "clutter",
-      "FnName": "getImageAttachment",
+      "FnName": "getImageSmall",
       "Input": "%h0%",
       "Output": "data:image/png;base64,test",
       "Exposure": "public",

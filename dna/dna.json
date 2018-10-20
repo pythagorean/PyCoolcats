@@ -150,12 +150,12 @@
           "Exposure": "public"
         },
         {
-          "Name": "postImageAttachment",
+          "Name": "postImageSmall",
           "CallingType": "string",
           "Exposure": "public"
         },
         {
-          "Name": "getImageAttachment",
+          "Name": "getImageSmall",
           "CallingType": "string",
           "Exposure": "public"
         },

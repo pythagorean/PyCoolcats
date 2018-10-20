@@ -2,7 +2,7 @@ from paver.easy import *
 
 runtime = []
 rtfile = path('src/transcrypt-runtime.js')
-py_functions = ['dict', 'list', 'tuple', 'len', '__in__']
+py_functions = ['dict', 'list', 'tuple', 'len', 'str', '__in__']
 
 def transpile(pyfile):
     global runtime, rtfile, py_functions

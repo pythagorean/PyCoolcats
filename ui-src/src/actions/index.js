@@ -11,8 +11,8 @@ export const APP_PROPERTY = 'appProperty'
 export const POST = 'post'
 export const POST_MOD = 'postMod'
 export const GET_POST = 'getPost'
-export const POST_IMAGE_ATTACHMENT = 'postImageAttachment'
-export const GET_IMAGE_ATTACHMENT = 'getImageAttachment'
+export const POST_IMAGE_ATTACHMENT = 'postImageSmall'
+export const GET_IMAGE_SMALL = 'getImageSmall'
 export const FOLLOW = 'follow'
 export const GET_POSTS_BY = 'getPostsBy'
 export const GET_POSTS_HASHTAG = 'getPostsWithHashtag'
@@ -252,17 +252,16 @@ export function getPost(postHash, then) {
   }
 }
 
-export function getImageAttachment(postHash, then) {
+export function getImageSmall(postStamp, imageHash, then) {
   return {
-    type: GET_IMAGE_ATTACHMENT,
+    type: GET_IMAGE_SMALL,
     meta: {
       isHc: true,
       namespace: 'clutter',
-      data: {
-        postHash
-      },
+      data: imageHash,
+      postStamp: postStamp,
       then
-    }
+    },
   }
 }
 
