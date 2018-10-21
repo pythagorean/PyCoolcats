@@ -4,7 +4,7 @@ import createReactClass from 'create-react-class'
 import { Link } from 'react-router-dom'
 import AttachmentContainer from '../AttachmentContainer'
 import FavesContainer from '../FavesContainer'
-const { div, a } = require('hyperscript-helpers')(e)
+const { div, a, br } = require('hyperscript-helpers')(e)
 ''')
 
 __pragma__('noalias', 'split') # use js_split
@@ -56,7 +56,7 @@ def meowRender(self):
         e(Link, { 'to': "/meow/" + hash, 'className': "stamp" },
             __new__(Date(stamp)).toString()),
         div({ 'className': "message" },
-            self.urlify(message), ' ',
+            self.urlify(message), br(),
             e(AttachmentContainer, { 'post': post })),
         e(FavesContainer, { 'hash': hash }))
 

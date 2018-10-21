@@ -14,7 +14,7 @@
       "Convey": "We can post a thumbnail image",
       "Zome": "clutter",
       "FnName": "postImageSmall",
-      "Input": "data:image/png;base64,test",
+      "Input": "data:image/jpeg;base64,test",
       "Output": "%h0%",
       "Exposure": "public",
       "Err": "",
@@ -25,7 +25,7 @@
       "Zome": "clutter",
       "FnName": "getImageSmall",
       "Input": "%h0%",
-      "Output": "data:image/png;base64,test",
+      "Output": "data:image/jpeg;base64,test",
       "Exposure": "public",
       "Err": "",
       "Regexp": ""

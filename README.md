@@ -12,7 +12,7 @@ To compile the Python for Holochain and React, you will first need to install
     pip install paver
 
 Just run 'make' and it should build the Zome and then the UI automatically, as
-long as you have Holochain and therefore npm or yarn already installed as well.
+long as you have npm or yarn already installed as well.
 
 If you don't understand what this is about, please see the clutter page linked above.
 

@@ -1,5 +1,7 @@
 __pragma__('js', '{}', '''
+import { createElement as e } from 'react'
 import createReactClass from 'create-react-class'
+const { img } = require('hyperscript-helpers')(e)
 ''')
 
 def attachmentComponentDidMount(self):
@@ -10,7 +12,9 @@ def attachmentComponentDidMount(self):
     if 'image_small' in attachment: getImageSmall()
 
 def attachmentRender(self):
-    return 'imagedata' in self.props.post and self.props.post.imagedata[:40] or ''
+    if 'imagedata' not in self.props.post: return ''
+    imagedata = self.props.post.imagedata
+    return img({ 'src': imagedata })
 
 Attachment = createReactClass({
     'componentDidMount': lambda: attachmentComponentDidMount(this),

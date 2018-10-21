@@ -10,20 +10,21 @@ def newMeowOnSubmit(self, meow):
     newMeowText = self.state['newMeowText']
     newMeowImage = self.state['newMeowImage']
     if not newMeowText: return
-    postImageAttachment = self.props.postImageAttachment
+    postImageSmall = self.props.postImageSmall
     post = self.props.post
-    if newMeowImage: Jimp.read(newMeowImage).then(
-        lambda image: (image
-            .scaleToFit(200, 150)
-            .rgba(False)
-            .getBase64(Jimp.MIME_PNG,
-                lambda _err, thumbnail: postImageAttachment(thumbnail,
-                    lambda attach: post(newMeowText, { 'image_small': attach })
-                    ))))
+    if newMeowImage:
+        Jimp.read(newMeowImage).then(
+            lambda image: (image
+                .scaleToFit(200, 150, Jimp.RESIZE_BICUBIC)
+                .quality(100)
+                .getBase64(Jimp.MIME_JPEG,
+                    lambda _err, thumbnail: postImageSmall(thumbnail,
+                        lambda attach: post(newMeowText, { 'image_small': attach })
+                        ))))
+        self.setState({ 'newMeowImage': "" })
+        self.inputImage.current.value = ""
     else: post(newMeowText)
     self.setState({ 'newMeowText': "" })
-    self.setState({ 'newMeowImage': "" })
-    self.inputImage.current.value = ""
 
 def newMeowUpdateImage(self, file):
     input = file.target

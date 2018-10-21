@@ -11,7 +11,7 @@ export const APP_PROPERTY = 'appProperty'
 export const POST = 'post'
 export const POST_MOD = 'postMod'
 export const GET_POST = 'getPost'
-export const POST_IMAGE_ATTACHMENT = 'postImageSmall'
+export const POST_IMAGE_SMALL = 'postImageSmall'
 export const GET_IMAGE_SMALL = 'getImageSmall'
 export const FOLLOW = 'follow'
 export const GET_POSTS_BY = 'getPostsBy'
@@ -208,9 +208,9 @@ export function post(message, attachment, then) {
   return postdata
 }
 
-export function postImageAttachment(thumbnail, then) {
+export function postImageSmall(thumbnail, then) {
   return {
-    type: POST_IMAGE_ATTACHMENT,
+    type: POST_IMAGE_SMALL,
     meta: {
       isHc: true,
       namespace: 'clutter',
