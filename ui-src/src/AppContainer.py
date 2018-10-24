@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import App from './App'
 import { logOut, resetState, getFirstName, appProperty, getHandle, getHandles, getFollow, getPostsBy, getProfilePic } from './actions'

@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import HashtagFeed from './HashtagFeed'
 import { getPostsWithHashtag } from './actions'

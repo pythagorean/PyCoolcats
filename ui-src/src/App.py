@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { createElement as e } from 'react'
 import { Route, Link } from 'react-router-dom'
 import createReactClass from 'create-react-class'

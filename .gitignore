@@ -1,4 +1,7 @@
 node_modules/
 videos/
+screenshots/
 ui/
+src/
 yarn.lock
+package-lock.json

@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import Follow from './components/Follow'
 import { follow, unfollow } from './actions'

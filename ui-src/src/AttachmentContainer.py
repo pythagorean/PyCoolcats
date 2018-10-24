@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import Attachment from './Attachment'
 import { getImageSmall } from './actions'

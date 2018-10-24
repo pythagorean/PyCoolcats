@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import FollowingFeed from './FollowingFeed'
 import { getPostsBy, getFollow } from './actions'

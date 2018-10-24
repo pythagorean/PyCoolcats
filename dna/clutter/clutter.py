@@ -592,8 +592,8 @@ def validate(entry_type, entry, header, sources):
         image = entry
         prefix = "data:image/jpeg;base64,"
         prefix_len = len(prefix)
-        # max resolution times 8.25 bits per color for jpeg
-        maxsize = 200 * 150 * 3 * 33 // 32 + prefix_len
+        # 4/3 (base 64) max resolution times 8.25 bits per color for jpeg
+        maxsize = 4 * 200 * 150 * 33 // 32 + prefix_len
         if image[:prefix_len] is not prefix:
             hc_debug('validate image_small failure: ' + image[:prefix_len])
             return False

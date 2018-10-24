@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { createElement as e } from 'react'
 import PropTypes from 'prop-types'
 const { div, button } = require('hyperscript-helpers')(e)

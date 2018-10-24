@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { createElement as e } from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'

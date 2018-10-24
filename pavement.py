@@ -3,25 +3,16 @@ from paver.easy import *
 @task
 def setup():
     if sh('which yarn', capture=True, ignore_error=True):
-        if not path('node_modules').isdir():
-            sh('yarn')
-        if not path('ui-src/node_modules').isdir():
-            sh('yarn', cwd='ui-src')
-        if not path('ui-automation/node_modules').isdir():
-            sh('yarn', cwd='ui-automation')
+        installer = 'yarn'
     else:
-        if not path('node_modules').isdir():
-            sh('npm install')
-        if not path('ui-src/node_modules').isdir():
-            sh('npm install', cwd='ui-src')
-        if not path('ui-automation/node_modules').isdir():
-            sh('npm-install', cwd='ui-automation')
+        installer = 'npm install'
+    if not path('ui-src/node_modules').isdir():
+        sh(installer, cwd='ui-src')
+    if not path('ui-automation/node_modules').isdir():
+        sh(installer, cwd='ui-automation')
 
 @task
 @needs(['setup'])
-@cmdopts([
-    ('runtime', 'r', 'Include runtime in app DNA'),
-])
 def build(options):
     hc_api = ['// Holochain API functions for Transcrypted Python module']
     hc_functions = [
@@ -31,38 +22,29 @@ def build(options):
     for function in hc_functions:
         hc_api.append('var hc_' + function + ' = ' + function + ';')
     hc_api += [' = '.join(hc_functions[1:]) + ' = undefined;', '']
-    runtime = polyfill = []
-    if hasattr(options, 'runtime'):
-        rtfile = path('dna/runtime.js')
-        if rtfile.isfile():
-            runtime = rtfile.lines()
-        else:
-            polyfill = ['// Using babel polyfill libraries for otto']
-            polyfill += path('node_modules/babel-polyfill/dist/polyfill.js').lines()
+    rtfile = path('dna/runtime.js')
+    runtime = rtfile.lines()
     for dir in path('dna').dirs():
         for pyfile in dir.files('*.py'):
-            jsfile = dir + '/__javascript__/' + pyfile.namebase + '.js'
+            jsfile = path(pyfile.relpath()[:-3] + '.js')
+            outfile = dir + '/__target__/' + pyfile.namebase + '.js'
             if jsfile.isfile() and jsfile.ctime > pyfile.ctime: continue
-            modfile = path(jsfile.relpath()[:-3] + '.mod.js')
-            sh('transcrypt -n -p .none ' + pyfile.relpath())
-            if hasattr(options, 'runtime') and options.runtime and not runtime:
-                # Construct javascript runtime for otto
-                runtime = polyfill[:]
-                runtime.append('\n// Transcrypt runtime code for otto')
-                for line in jsfile.lines()[3:]:
-                    if line[1:2] == '(': break
-                    runtime.append(line)
-
-            modlines = ['\n// Transcrypted Python module for otto']
-            for line in modfile.lines()[2:]:
-                if line[3:4] == '_': break
-                modlines.append(line[2:])
-
-            jsfile.write_lines(hc_api + runtime + modlines)
-            minfile = path(jsfile.relpath()[:-3] + '.min.js')
-            print('Minifying target code in: ' + minfile.relpath())
-            sh('node_modules/uglify-js/bin/uglifyjs --compress --mangle -- ' +
-                jsfile.relpath() + ' > ' + minfile.relpath())
+            sh('transcrypt -e 5 -n -p .none ' + pyfile.relpath())
+            mainstart = False
+            jslines = ['\n// Transcrypted Python module for otto']
+            for line in outfile.lines():
+                if not mainstart:
+                    if line[:26] == "var __name__ = '__main__';":
+                        mainstart = True
+                    continue
+                if line[:3] == "//#":
+                    break
+                if line[:7] == "export ":
+                    line = line[7:]
+                jslines.append(line)
+            jsfile.write_lines(hc_api + runtime + jslines)
+            # cleanup intermediate javascript
+            sh('rm -rf ' + dir + '/__target__/')
 
     if sh('which yarn', capture=True, ignore_error=True):
         sh('yarn build', cwd='ui-src')
@@ -71,7 +53,10 @@ def build(options):
 
 @task
 def clean():
-    sh('for x in `find . -name "__javascript__"`; do rm -rf $x; done')
+    for dir in path('dna').dirs():
+        for pyfile in dir.files('*.py'):
+            jsfile = path(pyfile.parent + '/' + pyfile.namebase + '.js')
+            if jsfile.isfile(): sh('rm ' + jsfile)
     sh('paver clean', cwd='ui-src')
 
 @task

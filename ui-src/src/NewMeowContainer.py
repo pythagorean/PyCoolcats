@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import NewMeow from './NewMeow'
 import { post, postImageSmall } from './actions'

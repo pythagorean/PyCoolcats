@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import Settings from './Settings'
 import { appProperty, getFirstName, useHandle, setFirstName, toggleModal } from './actions'

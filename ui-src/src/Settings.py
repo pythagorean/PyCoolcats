@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { createElement as e } from 'react'
 import createReactClass from 'create-react-class'
 const { div, p, i, form, input, button } = require('hyperscript-helpers')(e)

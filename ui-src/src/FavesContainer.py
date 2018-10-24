@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import Faves from './components/Faves'
 import { addFavourite, removeFavourite } from './actions'

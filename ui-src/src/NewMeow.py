@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { createRef, createElement as e } from 'react'
 import createReactClass from 'create-react-class'
 import Jimp from 'jimp/es'

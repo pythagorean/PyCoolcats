@@ -1,5 +1,5 @@
 build:
-	paver -q build -r
+	paver -q build
 
 clean:
 	paver clean

@@ -1,4 +1,4 @@
-__pragma__('js', '{}', '''
+js_import = ('''
 import { connect } from 'react-redux'
 import EditProfile from './EditProfile'
 import { getFirstName, setFirstName, setProfilePic } from './actions'
