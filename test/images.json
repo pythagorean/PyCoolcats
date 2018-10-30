@@ -67,6 +67,28 @@
       "Exposure": "public",
       "Err": "",
       "Regexp": ""
+    },
+    {
+      "Convey": "We can retrieve posts with thumbnail image attachment",
+      "Zome": "clutter",
+      "FnName": "getPostsBy",
+      "Input": ["imagetester"],
+      "Output": [
+        {
+          "H": "%h1%",
+          "author": "imagetester",
+          "post": {
+            "message": "here is a test post",
+            "stamp": 12345,
+            "attachment": {
+              "image_small": "%h2%"
+            }
+          }
+        }
+      ],
+      "Exposure": "public",
+      "Err": "",
+      "Regexp": ""
     }
   ]
 }

@@ -40,8 +40,7 @@ FollowingFeed = createReactClass({
 
     'render':
         lambda: div({ 'id': 'meows' },
-            this.props.postList.map(lambda post: e(Meow,
-                { 'post': post, 'key': post.stamp })))
+            this.props.postList.map(lambda post: e(Meow, { 'post': post })))
     })
 
 __pragma__('js', 'export default FollowingFeed')

@@ -31,7 +31,6 @@ mapDispatchToProps = lambda dispatch: {
 def mergeProps(stateProps, dispatchProps, ownProps):
     props = __pragma__('js', '{}', '{ ...stateProps, ...dispatchProps }')
     # my feed is a list of posts that are either by me or people I follow
-    # console.log('feed ' + JSON.stringify(users))
     props['getMyFeed'] = lambda postsBy: dispatchProps.getPostsBy(postsBy)
     return props
 
