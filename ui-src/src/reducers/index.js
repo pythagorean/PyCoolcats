@@ -100,9 +100,16 @@ export default function clutterApp(state = initialState, action) {
       if (!payload) {
         return state
       }
-      const imageState = { ...state }
-      imageState.posts[meta.postStamp].imagedata = payload
-      return imageState
+      return {
+        ...state,
+        posts: {
+          ...state.posts,
+          [meta.postStamp]: {
+            ...state.posts[meta.postStamp],
+            imagedata: payload
+          }
+        }
+      }
     case A.GET_FOLLOW:
       // console.log('follows reducer ' + JSON.stringify(payload))
       const newFollows = payload.reduce((memo, handleHash) => {

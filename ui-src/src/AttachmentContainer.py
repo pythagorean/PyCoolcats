@@ -6,10 +6,10 @@ import { getImageSmall } from './actions'
 
 def mapStateToProps(state, ownProps):
     postStamp = ownProps.post.stamp
-    if 'imagedata' not in state.posts[postStamp]: return ownProps
-    props = dict(ownProps)
-    props.post['imagedata'] = state.posts[postStamp].imagedata
-    return props
+    if 'imagedata' not in state.posts[postStamp]: return {}
+    return {
+        'imagedata': state.posts[postStamp].imagedata
+        }
 
 mapDispatchToProps = lambda dispatch, ownProps: {
     'getImageSmall': lambda: dispatch(
