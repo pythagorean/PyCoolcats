@@ -7,8 +7,9 @@ const { img } = require('hyperscript-helpers')(e)
 def attachmentComponentDidMount(self):
     if 'imagedata' not in self.props and 'attachment' in self.props.post:
         getImageSmall = self.props.getImageSmall
-        attachment = self.props.post.attachment
-        if 'image_small' in attachment: getImageSmall()
+        post = self.props.post
+        if 'image_small' in post.attachment:
+            getImageSmall(post.stamp, post.attachment.image_small)
 
 def attachmentRender(self):
     if 'imagedata' not in self.props: return ''

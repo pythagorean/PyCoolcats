@@ -11,9 +11,9 @@ def mapStateToProps(state, ownProps):
         'imagedata': state.posts[postStamp].imagedata
         }
 
-mapDispatchToProps = lambda dispatch, ownProps: {
-    'getImageSmall': lambda: dispatch(
-        getImageSmall(ownProps.post.stamp, ownProps.post.attachment.image_small))
+mapDispatchToProps = lambda dispatch: {
+    'getImageSmall': lambda postStamp, imageHash: dispatch(
+        getImageSmall(postStamp, imageHash))
     }
 
 __pragma__('js',
